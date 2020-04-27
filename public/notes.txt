@@ -1,3 +1,5 @@
 4.20.20
 
 Containers are stateful components 
+npm install --save prop-types to validate proptypes, you can use them
+on both functional and class based components
