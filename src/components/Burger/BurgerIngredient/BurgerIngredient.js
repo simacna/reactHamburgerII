@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
-import classes from './Burger'
+import classes from './BurgerIngredient.css'
 import { classExpression } from '@babel/types';
 
-
+//  console.log('classes', classes);
 class BurgerIngredient extends Component  {
   render() {
      //need some logic to show jsx code to show what ingredient to render
   let ingredient = null; 
+ 
 
   switch(this.props.type){ //type is a property i expected eto receive
     case('bread-bottom'):
@@ -40,8 +41,8 @@ class BurgerIngredient extends Component  {
  
 }
 
-BurgerIngredient.propTypes = {
-  type: PropTypes.string.isRequired;
-}
+// BurgerIngredient.propTypes = {
+//   type: PropTypes.string.isRequired
+// }
 
 export default BurgerIngredient;
