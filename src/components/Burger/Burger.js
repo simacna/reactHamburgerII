@@ -2,10 +2,10 @@ import React from 'react';
 import classes from './Burger.css';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient'
 
-
 const Burger = (props) => {
   //transfer objct to key/value pairs below
-  console.log('props', props.ingredients);
+
+  //transofmredingredients will always be an array, we can reduce it in order to see if it's empty or not 
   const transformedIngredients = Object.keys(props.ingredients)
   // .map(ingKey => {
   //   return([...Array(props.ingredients[ingKey])]).map((_, i)=>{
@@ -21,7 +21,10 @@ const Burger = (props) => {
             return (<BurgerIngredient key={ingKey+i} type={ingKey} />)
         })
     })
-
+    .reduce((arr, el) => {
+      return arr.concat(el);
+    }, []);
+  console.log(transformedIngredients);
   return(
     
     <div className={'Burger'}>
