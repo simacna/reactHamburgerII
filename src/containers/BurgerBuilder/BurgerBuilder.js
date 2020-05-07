@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Aux from '../../hoc/Aux';
 import Burger from '../../components/Burger/Burger';
+import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 
 class BurgerBuilder extends Component {
 	//could've also manage state with:
@@ -18,13 +19,29 @@ class BurgerBuilder extends Component {
 			bacon: 0, 
 			cheese: 0,
 			meat: 0
-		}
+		},
+		totalPrice: 4
+	}
+
+	addIngredient = (type) => {
+		const oldCount = this.state.ingredients[type];
+		const upddatedCount = oldCount + 1;
+		const updateIngredients = {
+			...this.state.ingredients
+		};
+		updatedIngredients[type] = updatedCount;
+		
+	}
+
+	removeIngredient = (type) => {
+
 	}
   render(){
 		return(
 				<Aux>
 					<Burger ingredients={this.state.ingredients} />
-					<div>Build Controls</div>
+					<BuildControls />
+					{/* <div>Build Controls</div> */}
 				</Aux>
 
 
