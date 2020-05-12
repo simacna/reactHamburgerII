@@ -4,7 +4,7 @@ import BurgerIngredient from './BurgerIngredient/BurgerIngredient'
 
 const Burger = (props) => {
   //transfer objct to key/value pairs below
-
+  console.log('props in burger.js', props);
   //transofmredingredients will always be an array, we can reduce it in order to see if it's empty or not 
   let transformedIngredients = Object.keys(props.ingredients)
   // .map(ingKey => {
