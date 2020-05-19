@@ -31,7 +31,12 @@ class BurgerBuilder extends Component {
 			meat: 0
 		},
 		totalPrice: 4,
-		purchaseable: false //true if at least 1 ing 
+		purchaseable: false, //true if at least 1 ing 
+		purchasing: false
+	}
+
+	purchaseHandler = () => {
+		this.setState({purchasing: true});
 	}
 
 	updatePurchaseState = (ingredients) =>{
@@ -90,7 +95,8 @@ for(let key in disabledInfo){
 //{salad: true, meat: false, ... } if true disabled
 		return(
 				<Aux>
-					<Modal>
+					{/* only if true, modal should be visible */}
+					<Modal show={this.state.purchasing}> 
 						<OrderSummary ingredients={this.state.ingredients} />
 					</Modal>
 					<Burger ingredients={this.state.ingredients} />
@@ -100,6 +106,7 @@ for(let key in disabledInfo){
 						disabled={disabledInfo}
 						purchaseable={this.state.purchaseable}
 						price={this.state.totalPrice}
+						ordered={this.purchaseHandler}
 					/>
 
 					{/* <div>Build Controls</div> */}
