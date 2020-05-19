@@ -53,6 +53,10 @@ class BurgerBuilder extends Component {
 		this.setState({purchaseable: sum > 0})
 
 	}
+
+	purchaseCancelHandler = () => {
+		this.setState({purchasing: false});
+	}
 	removeIngredientHandler = (type) => {
 		const oldCount = this.state.ingredients[type];
 		if(oldCount <= 0){
@@ -96,7 +100,7 @@ for(let key in disabledInfo){
 		return(
 				<Aux>
 					{/* only if true, modal should be visible */}
-					<Modal show={this.state.purchasing}> 
+					<Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}> 
 						<OrderSummary ingredients={this.state.ingredients} />
 					</Modal>
 					<Burger ingredients={this.state.ingredients} />
