@@ -31,7 +31,7 @@ const Burger = (props) => {
   console.log(transformedIngredients);
   return(
     
-    <div className={'Burger'}>
+    <div className='Burger'>
       {/* everything below is hard coded and not being dynamically rendered by state */}
       <BurgerIngredient type="bread-top"/>
         {transformedIngredients}
