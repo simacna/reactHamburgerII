@@ -1,12 +1,13 @@
 import React from 'react';
+import cl from './navigationItem.css';
 
-
-const nvationItem = (props) => (
-  <ul>
-    <li>
-      <a href="/">A Link</a>
+const navigationItem = (props) => (
+    <li className="Navigationitem">
+      <a href={props.link} 
+      className={props.active ? className={'active'}: null}> 
+      {props.children}</a>
     </li>
-  </ul>
+ 
 )
 
-export default nvationItems();
+export default navigationItem;
