@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import Aux from '../../hoc/Aux';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
-import Modal from '../../components/UI/Modal/Modal'
-import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
+import Modal from '../../components/UI/Modal/Modal';
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
+import instance from '../../axios-orders';
 
 //global constants usually capital
 const INGREDIENT_PRICES = {
@@ -58,7 +59,24 @@ class BurgerBuilder extends Component {
 		this.setState({purchasing: false});
 	}
 	purchaseContinueHandler = () => {
-		alert('You continue!');
+		// alert('Yofafas');
+		const order = {
+			inrgredients: this.state.ingredients,
+			price: this.state.totalPrice,
+			customer: {
+				name: 'sina',
+				address: {
+					street: 'test',
+					zipCode: '353',
+					country: 'US'
+				},
+				email: 'test'
+			}, deliveryMethod: 'fast'
+		}
+		//for firebase y ou have to add .json
+		instance.post('/orders.json', order)
+			.then(response => console.log(response))
+			.catch(error => console.log(error));
 	}
 	removeIngredientHandler = (type) => {
 		const oldCount = this.state.ingredients[type];
