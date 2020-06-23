@@ -7,6 +7,7 @@ import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import instance from '../../axios-orders';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
+import axios from 'axios';
 //global constants usually capital
 const INGREDIENT_PRICES = {
 	salad: 0.5,
@@ -26,16 +27,22 @@ class BurgerBuilder extends Component {
 
 	//we want to give our Burger component below ingredients
 	state = {
-		ingredients: {
-			salad: 0,
-			bacon: 0, 
-			cheese: 0,
-			meat: 0
-		},
+		ingredients: false,
 		totalPrice: 4,
 		purchaseable: false, //true if at least 1 ing 
 		purchasing: false,
-		loading: false
+		loading: false,
+		error: false
+	}
+
+	componentDidMount() {
+		axios.get('https://reactburger-562df.firebaseio.com/ingredients.json')
+			.then(response => {
+				console.log(response.data);
+					this.setState({ingredients: response.data})
+			}).catch(error => {
+				this.setState({error: true})
+			})
 	}
 
 	purchaseHandler = () => {
@@ -77,7 +84,7 @@ class BurgerBuilder extends Component {
 			}, deliveryMethod: 'fast'
 		}
 		//for firebase y ou have to add .json
-		instance.post('/orders.json', order)
+		axios.post('/orders.json', order)
 			.then(response => {
 				this.setState({loading: false, purchasing: false});
 			})
@@ -124,6 +131,7 @@ class BurgerBuilder extends Component {
 		for(let key in disabledInfo){
 		disabledInfo[key] = disabledInfo[key] <= 0
 		}
+		// let orderSummary = null;
 		let orderSummary = <OrderSummary ingredients={this.state.ingredients} 
 						purchaseCancelled={this.purchaseCancelHandler}
 						purchaseContinue ={this.purchaseContinueHandler}
@@ -156,5 +164,5 @@ class BurgerBuilder extends Component {
 		);
 	}
 }
-export default withErrorHandler(BurgerBuilder);
+export default withErrorHandler(BurgerBuilder, axios);
 
